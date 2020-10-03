@@ -16,6 +16,9 @@ public class PlayerScript : MonoBehaviour
     public bool isGrounded;
     public float moveSpeed;
     public float gravity = -9.81f;
+    public bool isMoving;
+    public bool canPlayStep;
+    float timeSinceLastStep;
     Vector3 velocity;
 
     void Awake()
@@ -38,6 +41,17 @@ public class PlayerScript : MonoBehaviour
             float zMove = Input.GetAxis("Vertical");
 
             Vector3 move = transform.right * xMove + transform.forward * zMove;
+
+            if(move.x > 0 || move.y > 0)
+            {
+                if(!isMoving)
+                    isMoving = true;
+            }
+            else
+            {
+                if(isMoving)
+                    isMoving = false;
+            }
 
             controller.SimpleMove(move * moveSpeed);
 
