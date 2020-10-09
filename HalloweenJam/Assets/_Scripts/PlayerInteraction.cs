@@ -6,30 +6,57 @@ public class PlayerInteraction : MonoBehaviour
 {
     bool interacting;
     public float interactDist;
+    public LayerMask targetMask;
+    public TextHandler displayText;
+    public Animator anim;
+    RuntimeAnimatorController currentController;
+    public GameObject heldItem;
     Camera cam;
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        cam = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        RaycastHit hit;
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactDist, targetMask))
         {
-            Interact();
+            //Grab the Description class
+            string hitText = hit.transform.GetComponent<Description>().description;
+            //Show dialogue box
+            if(!displayText.isShowing(hitText))
+            {
+                displayText.ShowText(hitText);
+            }
+            if(Input.GetMouseButtonDown(0))
+            {
+                Interact(hit.transform.gameObject);
+            }
+        }
+        else
+        {
+            //Remove dialogue box
+            if(displayText.isShowing())
+                displayText.ResetText();
         }
     }
 
-    void Interact()
+    void Interact(GameObject target)
     {
-        if(!interacting)
+        Interactable item = target.GetComponent<Interactable>();
+        if(item.pickup)
         {
-            interacting = true;
-            RaycastHit hit;
-            Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactDist);
-            
+            heldItem = item.pickupPrefab;
+            //pickup the item with animation
+            anim.runtimeAnimatorController = item.animatorController;
+            anim.enabled = true;
+            Destroy(target);
+        }
+        else 
+        {
+
         }
     }
 }
