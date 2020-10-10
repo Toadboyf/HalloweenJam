@@ -9,4 +9,12 @@ public class Interactable : MonoBehaviour
     public GameObject pickupPrefab;
     public string heldName;
     public RuntimeAnimatorController animatorController;
+    public bool right;
+    public bool left;
+    public GameObject itemToEnable;
+
+    public void EnableOnPlayer()
+    {
+        itemToEnable.SetActive(true);
+    }
 }

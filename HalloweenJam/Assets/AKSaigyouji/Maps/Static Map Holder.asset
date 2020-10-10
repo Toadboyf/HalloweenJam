@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfb58d3b3c52e547b9e072a03961a5c, type: 3}
   m_Name: Static Map Holder
   m_EditorClassIdentifier: 
-  texture: {fileID: 2800000, guid: 4aeeec055891613458b54256b1718cf8, type: 3}
+  texture: {fileID: 2800000, guid: 9624a6edf37516243ae43ec4d3bcf5b4, type: 3}

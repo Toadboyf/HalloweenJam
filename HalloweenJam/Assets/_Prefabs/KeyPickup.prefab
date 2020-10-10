@@ -282,7 +282,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6711302944245395274}
-  m_LocalRotation: {x: -0.17458127, y: -0, z: -0, w: 0.9846428}
+  m_LocalRotation: {x: -0.1745848, y: 0, z: 0, w: 0.98464215}
   m_LocalPosition: {x: 103.107, y: 17.654, z: 131.573}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -335,9 +335,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickup: 1
-  pickupPrefab: {fileID: 3839598389620254470, guid: 26cd47d658514aa4e9e2fcd85f397f60, type: 3}
-  heldName: 
-  animatorController: {fileID: 0}
+  pickupPrefab: {fileID: 6711302944245395274}
+  heldName: Keyring
+  animatorController: {fileID: 9100000, guid: 47380310f4a980342bb66d573a1ee3be, type: 2}
+  right: 0
+  left: 0
 --- !u!1 &7524292440879042608
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,9 +8,12 @@ public class PlayerInteraction : MonoBehaviour
     public float interactDist;
     public LayerMask targetMask;
     public TextHandler displayText;
-    public Animator anim;
-    RuntimeAnimatorController currentController;
-    public GameObject heldItem;
+    public Animator rightAnim;
+    RuntimeAnimatorController rightCurrentController;
+    public Animator leftAnim;
+    RuntimeAnimatorController leftCurrentController;
+    public List<GameObject> heldItems = new List<GameObject>();
+    public IKTargetController IKController;
     Camera cam;
     void Awake()
     {
@@ -48,15 +51,27 @@ public class PlayerInteraction : MonoBehaviour
         Interactable item = target.GetComponent<Interactable>();
         if(item.pickup)
         {
-            heldItem = item.pickupPrefab;
-            //pickup the item with animation
-            anim.runtimeAnimatorController = item.animatorController;
-            anim.enabled = true;
-            Destroy(target);
-        }
-        else 
-        {
-
+            if(item.heldName == "flashlight")
+            {
+                heldItems.Add(item.pickupPrefab);
+                //leftAnim.runtimeAnimatorController = item.animatorController;
+                //leftAnim.enabled = true;
+                item.EnableOnPlayer();
+                //move left hand target from down pos to up pos.
+                IKController.MoveLeftUp();
+                Destroy(target);
+            }
+            else
+            {
+                heldItems.Add(item.pickupPrefab);
+                //pickup the item with animation
+                //rightAnim.runtimeAnimatorController = item.animatorController;
+                //rightAnim.enabled = true;
+                item.EnableOnPlayer();
+                //move right hand target from down pos to up pos.
+                IKController.MoveRightUp();
+                Destroy(target);
+            }
         }
     }
 }
