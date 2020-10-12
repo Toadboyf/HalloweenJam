@@ -25,10 +25,11 @@ public class IKTargetController : MonoBehaviour
         if(movingLeft)
         {
             //StartCoroutine(UpSpeed(target_l, left_up, "left"));
-            if(Vector3.Distance(target_l.position, left_up.position) > 0.01f)
+            if(Vector3.Distance(target_l.position, left_up.position) > 0.1f)
             {
                 //Vector3.Lerp(target_l.position, left_up.position, Time.deltaTime * moveSpeed);
-                target_l.position = left_up.position;
+                target_l.position = Vector3.MoveTowards(target_l.position, left_up.position, Time.deltaTime * moveSpeed);
+                //target_l.position = left_up.position;
             }
             else
             {
@@ -39,10 +40,11 @@ public class IKTargetController : MonoBehaviour
         if(movingRight)
         {
             //StartCoroutine(UpSpeed(target_r, right_up, "right"));
-            if(Vector3.Distance(target_r.position, right_up.position) > 0.01f)
+            if(Vector3.Distance(target_r.position, right_up.position) > 0.1f)
             {
                 //Vector3.Lerp(target_r.position, right_up.position, Time.deltaTime * moveSpeed);
-                target_r.position = right_up.position;
+                target_r.position = Vector3.MoveTowards(target_r.position, right_up.position, Time.deltaTime * moveSpeed);
+                //target_r.position = right_up.position;
             }
             else
             {

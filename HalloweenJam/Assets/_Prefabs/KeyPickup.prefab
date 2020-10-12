@@ -338,8 +338,9 @@ MonoBehaviour:
   pickupPrefab: {fileID: 6711302944245395274}
   heldName: Keyring
   animatorController: {fileID: 9100000, guid: 47380310f4a980342bb66d573a1ee3be, type: 2}
-  right: 0
+  right: 1
   left: 0
+  itemToEnable: {fileID: 0}
 --- !u!1 &7524292440879042608
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 499258886637547295}
-  m_LocalRotation: {x: -0, y: 0.49631664, z: -0, w: 0.86814165}
+  m_LocalRotation: {x: 0, y: 0.49631503, z: 0, w: 0.86814255}
   m_LocalPosition: {x: 103.4, y: 15.94, z: 130.85}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
@@ -43,7 +43,9 @@ GameObject:
   - component: {fileID: 7271117904674558484}
   - component: {fileID: 2397304532745014015}
   - component: {fileID: 3582912031300008094}
-  m_Layer: 0
+  - component: {fileID: 733190216547704030}
+  - component: {fileID: 733190216547704022}
+  m_Layer: 9
   m_Name: Sign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,6 +115,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &733190216547704030
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909295824549162198}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.020000001, y: 0.020000027, z: 0.020000007}
+  m_Center: {x: -0.000000059604645, y: 0, z: 0}
+--- !u!114 &733190216547704022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909295824549162198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 614f42397d42f6f4a9df81dc03d2e622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Warwick Mine West Shaft sDO NOT ENTER
 --- !u!1 &2244373751714046713
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +152,7 @@ GameObject:
   - component: {fileID: 6028048850782723493}
   - component: {fileID: 1482201949965327645}
   - component: {fileID: 2658592057703955280}
+  - component: {fileID: 733190216547704023}
   m_Layer: 0
   m_Name: Post
   m_TagString: Untagged
@@ -194,3 +223,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &733190216547704023
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2244373751714046713}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4946852426162558294, guid: d4f4a70f77dd85f48ab4d773c9c32547, type: 3}
