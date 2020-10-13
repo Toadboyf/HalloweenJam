@@ -55,7 +55,7 @@ Material:
     - _LightingBaked: 1
     - _LightingDynamic: 1
     - _LightingMode: 0
-    - _NumLayersCount: 3
+    - _NumLayersCount: 4
     - _PrecisionGeometryWeight: 1
     - _RenderQueueCategory: 0
     - _ShadingEvaluationMode: 1

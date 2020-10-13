@@ -11,8 +11,11 @@ public class IKTargetController : MonoBehaviour
     public float moveSpeed;
     public Transform target_l;
     public Transform target_r;
-    public bool movingLeft;
-    public bool movingRight;
+    public bool movingLeftup;
+    public bool movingRightup;
+    public bool movingLeftdown;
+    public bool movingRightdown;
+
 
     void Awake()
     {
@@ -22,33 +25,51 @@ public class IKTargetController : MonoBehaviour
 
     void Update()
     {
-        if(movingLeft)
+        if(movingLeftup)
         {
-            //StartCoroutine(UpSpeed(target_l, left_up, "left"));
             if(Vector3.Distance(target_l.position, left_up.position) > 0.1f)
             {
-                //Vector3.Lerp(target_l.position, left_up.position, Time.deltaTime * moveSpeed);
                 target_l.position = Vector3.MoveTowards(target_l.position, left_up.position, Time.deltaTime * moveSpeed);
-                //target_l.position = left_up.position;
             }
             else
             {
-                movingLeft = false;
+                movingLeftup = false;
                 SwitchSway(target_l);
             }
         }
-        if(movingRight)
+        else if(movingLeftdown)
         {
-            //StartCoroutine(UpSpeed(target_r, right_up, "right"));
-            if(Vector3.Distance(target_r.position, right_up.position) > 0.1f)
+            if(Vector3.Distance(target_l.position, left_down.position) > 0.1f)
             {
-                //Vector3.Lerp(target_r.position, right_up.position, Time.deltaTime * moveSpeed);
-                target_r.position = Vector3.MoveTowards(target_r.position, right_up.position, Time.deltaTime * moveSpeed);
-                //target_r.position = right_up.position;
+                target_l.position = Vector3.MoveTowards(target_l.position, left_down.position, Time.deltaTime * moveSpeed);
             }
             else
             {
-                movingRight = false;
+                movingLeftdown = false;
+                SwitchSway(target_l);
+            }
+        }
+        if(movingRightup)
+        {
+            if(Vector3.Distance(target_r.position, right_up.position) > 0.1f)
+            {
+                target_r.position = Vector3.MoveTowards(target_r.position, right_up.position, Time.deltaTime * moveSpeed);
+            }
+            else
+            {
+                movingRightup = false;
+                SwitchSway(target_r);
+            }
+        }
+        else if(movingRightdown)
+        {
+            if(Vector3.Distance(target_r.position, right_down.position) > 0.1f)
+            {
+                target_r.position = Vector3.MoveTowards(target_r.position, right_down.position, Time.deltaTime * moveSpeed);
+            }
+            else
+            {
+                movingRightdown = false;
                 SwitchSway(target_r);
             }
         }
@@ -56,36 +77,22 @@ public class IKTargetController : MonoBehaviour
     public void MoveLeftUp()
     {
         SwitchSway(target_l);
-        movingLeft = true;
+        movingLeftup = true;
     }
-
+    public void MoveLeftDown()
+    {
+        SwitchSway(target_l);
+        movingLeftdown = true;
+    }
     public void MoveRightUp()
     {
         SwitchSway(target_r);
-        movingRight = true;
+        movingRightup = true;
     }
-
-    IEnumerator UpSpeed(Transform hand, Transform target, string side)
+    public void MoveRightDown()
     {
-        if(Vector3.Distance(hand.position, target.position) > 0.01f)
-        {
-            Vector3.Lerp(hand.position, target.position, Time.deltaTime * moveSpeed);
-            yield return new WaitForEndOfFrame();
-        }
-        else
-        {
-            if(side == "left")
-            {
-                movingLeft = false;
-                SwitchSway(target_l);
-            }
-            else
-            {
-                movingRight = false;
-                SwitchSway(target_r);
-            }
-            yield return null;
-        }
+        SwitchSway(target_r);
+        movingRightdown = true;
     }
 
     public void SwitchSway(Transform target)

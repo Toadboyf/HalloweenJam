@@ -23,6 +23,7 @@ public class PlayerInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         RaycastHit hit;
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactDist, targetMask))
         {
@@ -44,6 +45,7 @@ public class PlayerInteraction : MonoBehaviour
             if(displayText.isShowing())
                 displayText.ResetText();
         }
+        
     }
 
     void Interact(GameObject target)
