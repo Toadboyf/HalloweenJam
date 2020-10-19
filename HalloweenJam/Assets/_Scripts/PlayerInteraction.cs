@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
 {
     bool interacting;
+    public bool looking;
     public float interactDist;
+    public Outline storedLookTargetOutline;
     public LayerMask targetMask;
     public TextHandler displayText;
     public Animator rightAnim;
@@ -14,38 +17,85 @@ public class PlayerInteraction : MonoBehaviour
     RuntimeAnimatorController leftCurrentController;
     public List<GameObject> heldItems = new List<GameObject>();
     public IKTargetController IKController;
+    AudioSource audioSource;
+    public TextHandler noteController;
+    PlayerScript playerController;
+    MouseLook playerLook;
     Camera cam;
     void Awake()
     {
         cam = Camera.main;
+        audioSource = GetComponent<AudioSource>();
+        playerController = GetComponent<PlayerScript>();
+        playerLook = GetComponentInChildren<MouseLook>();
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        RaycastHit hit;
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactDist, targetMask))
+        if(!looking)
         {
-            //Grab the Description class
-            string hitText = hit.transform.GetComponent<Description>().description;
-            //Show dialogue box
-            if(!displayText.isShowing(hitText))
+            RaycastHit hit;
+            if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, interactDist, targetMask))
             {
-                displayText.ShowText(hitText);
+                //Grab the Description class
+                //string hitText = hit.transform.GetComponent<Description>().description;
+                //Show dialogue box
+                /*
+                if(!displayText.isShowing(hitText))
+                {
+                    displayText.ShowText(hitText);
+                }
+                */
+                //Show outline while hovering over interactible objects
+                storedLookTargetOutline = hit.transform.gameObject.GetComponent<Outline>();
+                storedLookTargetOutline.enabled = true;
+                if(Input.GetMouseButtonDown(0))
+                {
+                    Interact(hit.transform.gameObject);
+                }
             }
-            if(Input.GetMouseButtonDown(0))
+            else
             {
-                Interact(hit.transform.gameObject);
+                //Remove dialogue box
+                /*
+                if(displayText.isShowing())
+                    displayText.ResetText();
+                */
+
+                //remove item outline
+                if(storedLookTargetOutline != null)
+                {
+                    storedLookTargetOutline.enabled = false;
+                    storedLookTargetOutline = null;
+                }
             }
         }
-        else
+        else if(looking)
         {
-            //Remove dialogue box
-            if(displayText.isShowing())
-                displayText.ResetText();
+            if(audioSource.clip != null)
+            {
+                //Wait for note audio or note timer to end
+                if(!audioSource.isPlaying)
+                {
+                    looking = false;
+                    PlayerControlOnOff();
+                    noteController.ResetText();
+                    noteController.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                if(Input.GetMouseButtonDown(0))
+                {
+                    looking = false;
+                    PlayerControlOnOff();
+                    noteController.gameObject.SetActive(false);
+                    noteController.ResetText();
+                }
+            }
         }
-        
     }
 
     void Interact(GameObject target)
@@ -56,8 +106,6 @@ public class PlayerInteraction : MonoBehaviour
             if(item.heldName == "flashlight")
             {
                 heldItems.Add(item.pickupPrefab);
-                //leftAnim.runtimeAnimatorController = item.animatorController;
-                //leftAnim.enabled = true;
                 item.EnableOnPlayer();
                 //move left hand target from down pos to up pos.
                 IKController.MoveLeftUp();
@@ -67,13 +115,28 @@ public class PlayerInteraction : MonoBehaviour
             {
                 heldItems.Add(item.pickupPrefab);
                 //pickup the item with animation
-                //rightAnim.runtimeAnimatorController = item.animatorController;
-                //rightAnim.enabled = true;
                 item.EnableOnPlayer();
                 //move right hand target from down pos to up pos.
                 IKController.MoveRightUp();
                 Destroy(target);
             }
         }
+        else if(item.note)
+        {
+            looking = true;
+            PlayerControlOnOff();
+            noteController.gameObject.SetActive(true);
+            noteController.ShowText(item.noteText);
+            if(item.noteAudio != null)
+            {
+                audioSource.PlayOneShot(item.noteAudio);
+            }
+        }
+    }
+
+    void PlayerControlOnOff()
+    {
+        playerController.isDisabled = !playerController.isDisabled;
+        playerLook.isDisabled = !playerLook.isDisabled;
     }
 }

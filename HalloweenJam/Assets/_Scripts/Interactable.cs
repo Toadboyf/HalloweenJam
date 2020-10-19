@@ -13,6 +13,9 @@ public class Interactable : MonoBehaviour
     public bool left;
     public GameObject itemToEnable;
 
+    public bool note;
+    public string noteText;
+    public AudioClip noteAudio;
     public void EnableOnPlayer()
     {
         itemToEnable.SetActive(true);

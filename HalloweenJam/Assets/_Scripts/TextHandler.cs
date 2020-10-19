@@ -7,11 +7,6 @@ public class TextHandler : MonoBehaviour
 {
     public Text text;
 
-    void Awake()
-    {
-        
-    }
-
     public void ShowText(string t)
     {
         text.gameObject.SetActive(true);
