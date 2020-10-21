@@ -132,8 +132,8 @@ GameObject:
   - component: {fileID: 2455238867160643297}
   - component: {fileID: 2455238867160643300}
   m_Layer: 0
-  m_Name: Player 1 1
-  m_TagString: Untagged
+  m_Name: Player NEWEST
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +145,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2455238867160643296}
-  m_LocalRotation: {x: -0.011260489, y: 0.5491762, z: -0.0074461596, w: -0.8355976}
+  m_LocalRotation: {x: -0.011262183, y: 0.5491771, z: -0.0074435924, w: -0.835597}
   m_LocalPosition: {x: 314.05066, y: 10.411561, z: 186.34457}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -153,7 +153,7 @@ Transform:
   - {fileID: 2455238867924347228}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -2.055, y: -278.249, z: -2.22}
+  m_LocalEulerAnglesHint: {x: 1.547, y: -426.628, z: 0.004}
 --- !u!143 &2455238867160643298
 CharacterController:
   m_ObjectHideFlags: 0
@@ -197,6 +197,7 @@ MonoBehaviour:
   gravity: -9.81
   isMoving: 0
   canPlayStep: 0
+  climbing: 0
 --- !u!114 &2455238867160643297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,11 +217,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   displayText: {fileID: 0}
+  leftSway: {fileID: 0}
+  rightSway: {fileID: 0}
   rightAnim: {fileID: 3537449623707223387}
   leftAnim: {fileID: 3537449623341349147}
   heldItems: []
   IKController: {fileID: 3537449623045413637}
   noteController: {fileID: 0}
+  blackScreenOverlay: {fileID: 0}
 --- !u!82 &2455238867160643300
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1153,7 +1157,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3537449623341349145}
   - component: {fileID: 3537449623341349147}
-  - component: {fileID: 3537449623341349146}
   m_Layer: 0
   m_Name: UpperArm.L
   m_TagString: Untagged
@@ -1195,20 +1198,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3537449623341349146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3537449623341349144}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e0ca6aa62a289d4bb9e1a38bfb86d45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  intensity: 10
-  smooth: 10
 --- !u!1 &3537449623360845286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1990,7 +1979,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3537449623707223385}
   - component: {fileID: 3537449623707223387}
-  - component: {fileID: 3537449623707223386}
   - component: {fileID: 3537449623707223388}
   m_Layer: 0
   m_Name: UpperArm.R
@@ -2022,7 +2010,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537449623707223384}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 4e5cf60d89dd8d141a50ce35f7e02ec9, type: 2}
   m_CullingMode: 0
@@ -2033,20 +2021,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3537449623707223386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3537449623707223384}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e0ca6aa62a289d4bb9e1a38bfb86d45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  intensity: 10
-  smooth: 10
 --- !u!114 &3537449623707223388
 MonoBehaviour:
   m_ObjectHideFlags: 0

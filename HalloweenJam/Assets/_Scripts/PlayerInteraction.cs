@@ -11,6 +11,8 @@ public class PlayerInteraction : MonoBehaviour
     public Outline storedLookTargetOutline;
     public LayerMask targetMask;
     public TextHandler displayText;
+    public Sway leftSway;
+    public Sway rightSway;
     public Animator rightAnim;
     RuntimeAnimatorController rightCurrentController;
     public Animator leftAnim;
@@ -19,6 +21,8 @@ public class PlayerInteraction : MonoBehaviour
     public IKTargetController IKController;
     AudioSource audioSource;
     public TextHandler noteController;
+    //public ScreenFader screenFader;
+    public Image blackScreenOverlay;
     PlayerScript playerController;
     MouseLook playerLook;
     Camera cam;
@@ -28,7 +32,6 @@ public class PlayerInteraction : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         playerController = GetComponent<PlayerScript>();
         playerLook = GetComponentInChildren<MouseLook>();
-        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
@@ -132,11 +135,46 @@ public class PlayerInteraction : MonoBehaviour
                 audioSource.PlayOneShot(item.noteAudio);
             }
         }
+        else if(item.isDoor)
+        {
+            if(!item.locked)
+            {
+                PlayerControlOnOff();
+                blackScreenOverlay.color = Color.black;
+                transform.position = item.teleportPos.position;
+                transform.rotation = item.teleportPos.rotation;
+                StartCoroutine(FadeFromBlack());
+            }
+        }
+        else if(item.animate)
+        {
+            //pause player while animation plays
+            if(item.pauseDuring)
+                PlayerControlOnOff();
+            //Add corresponding anim controller to item anim
+            item.animToStart.runtimeAnimatorController = item.animatorController;
+            //Turn on animator
+            item.animToStart.enabled = true;
+            item.animToStart.Play(item.stateToRun);
+        }
     }
 
-    void PlayerControlOnOff()
+    public IEnumerator FadeFromBlack()
+    {
+        for(float alpha = 1.0f; alpha > 0.0f; alpha -= Time.deltaTime)
+        {
+            blackScreenOverlay.color = new Color(blackScreenOverlay.color.r, blackScreenOverlay.color.g, blackScreenOverlay.color.b, alpha);
+
+            yield return null;
+        }
+        PlayerControlOnOff();
+    }
+
+    public void PlayerControlOnOff()
     {
         playerController.isDisabled = !playerController.isDisabled;
         playerLook.isDisabled = !playerLook.isDisabled;
+        leftSway.isDisabled = !leftSway.isDisabled;
+        rightSway.isDisabled = !rightSway.isDisabled;
     }
 }

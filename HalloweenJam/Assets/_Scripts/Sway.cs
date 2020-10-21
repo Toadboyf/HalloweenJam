@@ -7,6 +7,7 @@ public class Sway : MonoBehaviour
     public float intensity;
     public float smooth;
     Quaternion origin_rotation;
+    public bool isDisabled;
 
     void Start()
     {
@@ -15,7 +16,8 @@ public class Sway : MonoBehaviour
 
     void Update()
     {
-        UpdateSway();
+        if(!isDisabled)
+            UpdateSway();
     }
 
     private void UpdateSway()
@@ -32,4 +34,5 @@ public class Sway : MonoBehaviour
         //Rotate towards target
         transform.localRotation = Quaternion.Lerp(transform.localRotation, target_rotation, Time.deltaTime * smooth);
     }
+
 }
