@@ -30,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5322614633664150334}
-  m_LocalRotation: {x: -0, y: -0, z: -0.70710707, w: 0.7071066}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 295.964, y: 9.629151, z: 185.05847}
   m_LocalScale: {x: 0.052461814, y: 0.038929813, z: 0.038929813}
   m_Children: []
@@ -4375,10 +4375,16 @@ MonoBehaviour:
   left: 0
   itemToEnable: {fileID: 0}
   note: 1
-  noteText: For whomever reads this. My time is nearing its end, i am afraid. A darkness
-    is pulling at the very tethers of my mind. The knocking...Ever present, tearing
-    at my soul. The source. The source eludes me.  I am going to find it.  - R Warwick
+  noteText: What up binch, you found my note? sick.
   noteAudio: {fileID: 0}
+  isDoor: 0
+  locked: 0
+  teleportPos: {fileID: 0}
+  animate: 0
+  animToStart: {fileID: 0}
+  stateToRun: 
+  destroyAfter: 0
+  pauseDuring: 0
 --- !u!114 &5322614633664150311
 MonoBehaviour:
   m_ObjectHideFlags: 0
